@@ -1,13 +1,11 @@
 package es.edu.escuela_it.microservices.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.ToString;
+import lombok.*;
 
 @Data
 @ToString
 @NoArgsConstructor
+@RequiredArgsConstructor
 public class UserDTO {
 
     @NonNull
