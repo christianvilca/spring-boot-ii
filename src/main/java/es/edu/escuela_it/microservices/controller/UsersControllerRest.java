@@ -1,8 +1,12 @@
 package es.edu.escuela_it.microservices.controller;
 
 import es.edu.escuela_it.microservices.model.UserDTO;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.MalformedURLException;
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,7 +15,7 @@ import java.util.stream.Collectors;
 public class UsersControllerRest {
 
     @GetMapping("/{id}")
-    public UserDTO getUserById(@PathVariable Integer id){ // Otra forma @PathVariable("id") Integer idUser
+    public ResponseEntity<UserDTO> getUserById(@PathVariable Integer id){ // Otra forma @PathVariable("id") Integer idUser
         System.out.println("Recovery user by id");
         UserDTO userDTO = new UserDTO(1, "Christian");
         userDTO.setAge(35);
@@ -19,11 +23,11 @@ public class UsersControllerRest {
 
         // Spring traduce el objeto java a json
         // Jackson (libreria) esta trabajando para la serializacion y descerializacion
-        return userDTO;
+        return ResponseEntity.ok(userDTO);
     }
 
     @GetMapping
-    public List<UserDTO> listAllUsers( @RequestParam(required = false) String name,
+    public ResponseEntity<List<UserDTO>> listAllUsers( @RequestParam(required = false) String name,
                                        @RequestParam(required = false) String lastName,
                                        @RequestParam(required = false) Integer age) {
 
@@ -33,23 +37,32 @@ public class UsersControllerRest {
 
         list = list.stream().filter(u -> u.getName().contains(name)).collect(Collectors.toList());
 
-        return list;
+        return ResponseEntity.ok(list);
     }
 
     @PostMapping
-    public String createUser(@RequestBody UserDTO userDTO){
+    public ResponseEntity<String> createUser(@RequestBody UserDTO userDTO) throws MalformedURLException {
         System.out.println("Recovery user by id " + userDTO.getName());
-        return "http://localhost:8080/users/" + userDTO.getId();
+
+        // Recupera la ruta actual
+        URI location = ServletUriComponentsBuilder.
+                fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(userDTO.getId())
+                .toUri();
+
+        return ResponseEntity.created(location).build() ;
     }
 
     @PutMapping
-    public UserDTO updateUser(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO userDTO) {
         System.out.println("Updating data");
-        return userDTO;
+        return ResponseEntity.ok(userDTO);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable Integer id){
+    public ResponseEntity<Void> deleteUser(@PathVariable Integer id){
         System.out.println("Delete user by id");
+        return ResponseEntity.ok(null);
     }
 }
