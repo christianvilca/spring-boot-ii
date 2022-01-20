@@ -1,5 +1,6 @@
 package es.edu.escuela_it.microservices.controller;
 
+import es.edu.escuela_it.microservices.model.AccountDTO;
 import es.edu.escuela_it.microservices.model.UserDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -68,5 +69,19 @@ public class UsersControllerRest {
     public ResponseEntity<Void> deleteUser(@PathVariable Integer id){
         System.out.println("Delete user by id");
         return ResponseEntity.ok(null);
+    }
+
+    @GetMapping("/{id}/accounts")
+    public ResponseEntity<List<AccountDTO>> getUserAccounts(@PathVariable Integer id){
+        List<AccountDTO> list = List.of(new AccountDTO("Google"),
+                                    new AccountDTO("Twitter"),
+                                    new AccountDTO("EscuelaIT"));
+        return ResponseEntity.ok(list);
+    }
+
+    @GetMapping("/{id}/accounts/{idAccount}")
+    public ResponseEntity<AccountDTO> getUserAccountById(@PathVariable Integer id, @PathVariable Integer idAccount){
+
+        return ResponseEntity.ok(new AccountDTO("Google"));
     }
 }
