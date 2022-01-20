@@ -4,6 +4,7 @@ import es.edu.escuela_it.microservices.model.UserDTO;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class UsersControllerRest {
@@ -21,12 +22,15 @@ public class UsersControllerRest {
     }
 
     @GetMapping("/users")
-    public List<UserDTO> listAllUsers(){
-        List<UserDTO> list = List.of(
-            new UserDTO(1, "Christian"),
-            new UserDTO(2, "Miguel"),
-            new UserDTO(3, "Alvaro")
-        );
+    public List<UserDTO> listAllUsers( @RequestParam(required = false) String name,
+                                       @RequestParam(required = false) String lastName,
+                                       @RequestParam(required = false) Integer age) {
+
+        List<UserDTO> list = List.of(new UserDTO(1, "Rafael"),
+                new UserDTO(2, "Miguel"),
+                new UserDTO(3, "Alvaro"));
+
+        list = list.stream().filter(u -> u.getName().contains(name)).collect(Collectors.toList());
 
         return list;
     }
