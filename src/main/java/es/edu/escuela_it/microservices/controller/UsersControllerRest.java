@@ -7,9 +7,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@RequestMapping("/users")
 public class UsersControllerRest {
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/{id}")
     public UserDTO getUserById(@PathVariable Integer id){ // Otra forma @PathVariable("id") Integer idUser
         System.out.println("Recovery user by id");
         UserDTO userDTO = new UserDTO(1, "Christian");
@@ -21,7 +22,7 @@ public class UsersControllerRest {
         return userDTO;
     }
 
-    @GetMapping("/users")
+    @GetMapping
     public List<UserDTO> listAllUsers( @RequestParam(required = false) String name,
                                        @RequestParam(required = false) String lastName,
                                        @RequestParam(required = false) Integer age) {
@@ -35,19 +36,19 @@ public class UsersControllerRest {
         return list;
     }
 
-    @PostMapping("/users")
+    @PostMapping
     public String createUser(@RequestBody UserDTO userDTO){
         System.out.println("Recovery user by id " + userDTO.getName());
         return "http://localhost:8080/users/" + userDTO.getId();
     }
 
-    @PutMapping("/users")
+    @PutMapping
     public UserDTO updateUser(@RequestBody UserDTO userDTO) {
         System.out.println("Updating data");
         return userDTO;
     }
 
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable Integer id){
         System.out.println("Delete user by id");
     }
