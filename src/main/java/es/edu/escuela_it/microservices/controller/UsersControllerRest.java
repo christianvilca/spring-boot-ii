@@ -17,9 +17,13 @@ public class UsersControllerRest {
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable Integer id){ // Otra forma @PathVariable("id") Integer idUser
         System.out.println("Recovery user by id");
-        UserDTO userDTO = new UserDTO(1, "Christian");
-        userDTO.setAge(35);
-        userDTO.setLastname("Vilca");
+        UserDTO userDTO = null; //new UserDTO(1, "Christian");
+//        userDTO.setAge(35);
+//        userDTO.setLastname("Vilca");
+
+        if (userDTO == null) {
+            return ResponseEntity.notFound().build();
+        }
 
         // Spring traduce el objeto java a json
         // Jackson (libreria) esta trabajando para la serializacion y descerializacion
