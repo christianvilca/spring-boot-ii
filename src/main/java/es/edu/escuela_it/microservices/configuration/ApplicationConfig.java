@@ -19,4 +19,8 @@ public class ApplicationConfig {
     private String edition;
 
     private String[] countries;
+
+//    Variables de entorno
+//    @Value("${JAVA_HOME}")
+//    private String java;
 }
