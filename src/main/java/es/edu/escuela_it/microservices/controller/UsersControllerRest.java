@@ -7,6 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.hateoas.Link;
+
+import javax.validation.Valid;
+
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
@@ -65,8 +68,10 @@ public class UsersControllerRest {
         //return ResponseEntity.ok(list);
     }
 
+    // @Valid -> Indica que valide y que tome las validaciones que estan indicadas en el UserDTO
+    // sino que haga caso omiso
     @PostMapping
-    public ResponseEntity<String> createUser(@RequestBody UserDTO userDTO) throws MalformedURLException {
+    public ResponseEntity<String> createUser(@Valid @RequestBody UserDTO userDTO){
         System.out.println("Recovery user by id " + userDTO.getName());
 
         // Recupera la ruta actual
