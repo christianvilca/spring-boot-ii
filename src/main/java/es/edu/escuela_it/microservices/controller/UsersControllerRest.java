@@ -2,9 +2,13 @@ package es.edu.escuela_it.microservices.controller;
 
 import es.edu.escuela_it.microservices.model.AccountDTO;
 import es.edu.escuela_it.microservices.model.UserDTO;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.hateoas.Link;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -18,13 +22,17 @@ public class UsersControllerRest {
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable Integer id){ // Otra forma @PathVariable("id") Integer idUser
         System.out.println("Recovery user by id");
-        UserDTO userDTO = null; //new UserDTO(1, "Christian");
-//        userDTO.setAge(35);
-//        userDTO.setLastname("Vilca");
+        UserDTO userDTO = new UserDTO(1, "Christian");
+        userDTO.setAge(35);
+        userDTO.setLastname("Vilca");
 
-        if (userDTO == null) {
+        // Devuelve informacion de donde encontrar este recurso
+        Link withSelfRel = linkTo(methodOn(UsersControllerRest.class).getUserById(userDTO.getId())).withSelfRel();
+        userDTO.add(withSelfRel);
+
+        /*if (userDTO == null) {
             return ResponseEntity.notFound().build();
-        }
+        }*/
 
         // Spring traduce el objeto java a json
         // Jackson (libreria) esta trabajando para la serializacion y descerializacion
@@ -32,7 +40,7 @@ public class UsersControllerRest {
     }
 
     @GetMapping
-    public ResponseEntity<List<UserDTO>> listAllUsers( @RequestParam(required = false) String name,
+    public ResponseEntity<CollectionModel<UserDTO>> listAllUsers( @RequestParam(required = false) String name,
                                        @RequestParam(required = false) String lastName,
                                        @RequestParam(required = false) Integer age) {
 
@@ -40,9 +48,21 @@ public class UsersControllerRest {
                 new UserDTO(2, "Miguel"),
                 new UserDTO(3, "Alvaro"));
 
-        list = list.stream().filter(u -> u.getName().contains(name)).collect(Collectors.toList());
+        for (UserDTO userDTO : list) {
+            Link withSelfRel = linkTo(methodOn(UsersControllerRest.class).getUserById(userDTO.getId())).withSelfRel();
+            userDTO.add(withSelfRel);
 
-        return ResponseEntity.ok(list);
+            Link accountsRel = linkTo(methodOn(UsersControllerRest.class).getUserAccounts(userDTO.getId())).withRel("accounts");
+            userDTO.add(accountsRel);
+        }
+
+        Link link = linkTo(methodOn(UsersControllerRest.class).listAllUsers("", "", 0)).withSelfRel();
+        CollectionModel<UserDTO> result = CollectionModel.of(list, link);
+        return ResponseEntity.ok(result);
+
+        //list = list.stream().filter(u -> u.getName().contains(name)).collect(Collectors.toList());
+
+        //return ResponseEntity.ok(list);
     }
 
     @PostMapping
