@@ -4,6 +4,7 @@ import es.edu.escuela_it.microservices.model.AccountDTO;
 import es.edu.escuela_it.microservices.model.UserDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,13 @@ public class UsersControllerRest {
 
     @GetMapping("/{id}")
     @ApiOperation(notes="Retrieve one user system by id", value="Get user by id")
-    public ResponseEntity<UserDTO> getUserById(@PathVariable Integer id){ // Otra forma @PathVariable("id") Integer idUser
+    public ResponseEntity<UserDTO> getUserById(
+            @ApiParam(
+                    example = "1",
+                    value = "Identifier for User",
+                    allowableValues = "1,2,3,4",  // Esto no se hace solo para ver la flexibilidad de manipulacion
+                    required = true)
+            @PathVariable Integer id){ // Otra forma @PathVariable("id") Integer idUser
         System.out.println("Recovery user by id");
         UserDTO userDTO = new UserDTO(1, "Christian");
         userDTO.setAge(35);
