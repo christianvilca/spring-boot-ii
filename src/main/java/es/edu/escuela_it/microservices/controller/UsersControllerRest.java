@@ -2,9 +2,7 @@ package es.edu.escuela_it.microservices.controller;
 
 import es.edu.escuela_it.microservices.model.AccountDTO;
 import es.edu.escuela_it.microservices.model.UserDTO;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.*;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +26,10 @@ public class UsersControllerRest {
 
     @GetMapping("/{id}")
     @ApiOperation(notes="Retrieve one user system by id", value="Get user by id")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200,message = "Response ok if the operation was successful"),
+            @ApiResponse(code = 404,message = "Response not found if the resource could not be found")
+    })
     public ResponseEntity<UserDTO> getUserById(
             @ApiParam(
                     example = "1",
