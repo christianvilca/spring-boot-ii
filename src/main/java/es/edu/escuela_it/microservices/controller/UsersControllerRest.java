@@ -2,6 +2,8 @@ package es.edu.escuela_it.microservices.controller;
 
 import es.edu.escuela_it.microservices.model.AccountDTO;
 import es.edu.escuela_it.microservices.model.UserDTO;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,9 +22,11 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/users")
+@Api(tags = "User API Rest")
 public class UsersControllerRest {
 
     @GetMapping("/{id}")
+    @ApiOperation(notes="Retrieve one user system by id", value="Get user by id")
     public ResponseEntity<UserDTO> getUserById(@PathVariable Integer id){ // Otra forma @PathVariable("id") Integer idUser
         System.out.println("Recovery user by id");
         UserDTO userDTO = new UserDTO(1, "Christian");
