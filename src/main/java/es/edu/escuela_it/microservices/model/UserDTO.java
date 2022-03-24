@@ -5,7 +5,9 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import org.springframework.hateoas.RepresentationModel;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Data
 @EqualsAndHashCode(callSuper = true) // Lamamos a los metodos del padre
@@ -18,15 +20,30 @@ public class UserDTO extends RepresentationModel<UserDTO> {
 
     @NonNull
     // Estas anotaciones repercuten en las interfaces graficas del swagger
+    @NotNull
     @ApiModelProperty(notes = "Unique identifier of the User.", example = "1", required = true, position = 0)
     private Integer id;
+
     @NonNull
+    @NotBlank
     private String name;
 
     @NotNull
+    @Size(min = 6, max = 20)
     private String lastname;
 
+    @Positive
+    @Min(18)
+    @Max(90)
     @ToString.Exclude
     private int age;
 
+    @Email
+    private String email;
+
+    @AssertTrue // Que el campo sea siempre true
+    private boolean active;
+
+    @Past // Fechas que sean antes de la actual
+    private LocalDate birthDay;
 }
