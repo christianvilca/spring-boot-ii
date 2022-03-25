@@ -39,11 +39,14 @@ public class UserDTO extends RepresentationModel<UserDTO> {
     private int age;
 
     @Email
+    @ApiModelProperty(example = "string@gmail.com")
     private String email;
 
-    @AssertTrue // Que el campo sea siempre true
+    @AssertTrue(message = "{app.field.active.error}")
     private boolean active;
 
-    @Past // Fechas que sean antes de la actual
+    // Fechas que sean antes de la actual
+    @Past (message = "{app.field.birth_day.error}")
+    @ApiModelProperty(example = "1982-01-02")
     private LocalDate birthDay;
 }
