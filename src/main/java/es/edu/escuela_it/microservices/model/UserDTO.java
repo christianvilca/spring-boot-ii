@@ -1,5 +1,6 @@
 package es.edu.escuela_it.microservices.model;
 
+import es.edu.escuela_it.microservices.validators.CIF;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -49,4 +50,7 @@ public class UserDTO extends RepresentationModel<UserDTO> {
     @Past (message = "{app.field.birth_day.error}")
     @ApiModelProperty(example = "1982-01-02")
     private LocalDate birthDay;
+
+    @CIF // Podemos tambien poner mensaje
+    private String cif;
 }
