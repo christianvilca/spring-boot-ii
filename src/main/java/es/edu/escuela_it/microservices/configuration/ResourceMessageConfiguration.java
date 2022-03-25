@@ -41,7 +41,7 @@ public class ResourceMessageConfiguration implements WebMvcConfigurer {
     @Bean
     public SessionLocaleResolver localeResolver() {
         SessionLocaleResolver localeResolver = new SessionLocaleResolver();
-        localeResolver.setDefaultLocale(Locale.ENGLISH);
+        localeResolver.setDefaultLocale(new Locale("es")); // en ingles por defecto | Internacionalizacion
         return localeResolver;
     }
 
@@ -50,6 +50,8 @@ public class ResourceMessageConfiguration implements WebMvcConfigurer {
      */
     @Bean
     public LocaleChangeInterceptor localeChangeInterceptor() {
+        // Podemos permitir cambiar el lenguaje del mensaje con cada llamada al endpoint
+        // suministrando el param "lang"
         LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
         lci.setParamName("lang");
         return lci;
