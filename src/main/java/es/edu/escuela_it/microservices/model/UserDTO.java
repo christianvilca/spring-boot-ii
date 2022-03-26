@@ -1,6 +1,8 @@
 package es.edu.escuela_it.microservices.model;
 
 import es.edu.escuela_it.microservices.validators.CIF;
+import es.edu.escuela_it.microservices.validators.GroupValidatorOnCreate;
+import es.edu.escuela_it.microservices.validators.GroupValidatorOnUpdate;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -43,7 +45,8 @@ public class UserDTO extends RepresentationModel<UserDTO> {
     @ApiModelProperty(example = "string@gmail.com")
     private String email;
 
-    @AssertTrue(message = "{app.field.active.error}")
+    @AssertTrue(message = "{app.field.active.error}", groups = GroupValidatorOnCreate.class)
+    @AssertFalse(message = "Debe ser falso", groups = GroupValidatorOnUpdate.class)
     private boolean active;
 
     // Fechas que sean antes de la actual

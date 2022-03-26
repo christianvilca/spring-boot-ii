@@ -2,9 +2,12 @@ package es.edu.escuela_it.microservices.controller;
 
 import es.edu.escuela_it.microservices.model.AccountDTO;
 import es.edu.escuela_it.microservices.model.UserDTO;
+import es.edu.escuela_it.microservices.validators.GroupValidatorOnCreate;
+import es.edu.escuela_it.microservices.validators.GroupValidatorOnUpdate;
 import io.swagger.annotations.*;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.hateoas.Link;
@@ -84,7 +87,7 @@ public class UsersControllerRest {
     // @Valid -> Indica que valide y que tome las validaciones que estan indicadas en el UserDTO
     // sino que haga caso omiso
     @PostMapping
-    public ResponseEntity<String> createUser(@Valid @RequestBody UserDTO userDTO){
+    public ResponseEntity<String> createUser(@Validated(value = GroupValidatorOnCreate.class) @RequestBody UserDTO userDTO){
         System.out.println("Recovery user by id " + userDTO.getName());
 
         // Recupera la ruta actual
@@ -98,7 +101,7 @@ public class UsersControllerRest {
     }
 
     @PutMapping
-    public ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<UserDTO> updateUser(@Validated(value = GroupValidatorOnUpdate.class) @RequestBody UserDTO userDTO) {
         System.out.println("Updating data");
         return ResponseEntity.ok(userDTO);
     }
