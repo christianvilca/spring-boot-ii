@@ -23,6 +23,9 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 @RestController
@@ -49,20 +52,31 @@ public class UsersControllerRest {
             @PathVariable Integer id){ // Otra forma @PathVariable("id") Integer idUser
         System.out.println("Recovery user by id");
 
-        UserDTO userDTO = userService.getUserById(id);
+        Optional<UserDTO> optUserDTO = userService.getUserById(id);
 
-        // Devuelve informacion de donde encontrar este recurso
-        Link withSelfRel = linkTo(methodOn(UsersControllerRest.class).getUserById(userDTO.getId())).withSelfRel();
-        userDTO.add(withSelfRel);
+        try {
+            UserDTO userDTO = optUserDTO.orElseThrow(NoSuchElementException::new);
 
-        /*if (userDTO == null) {
+            //optUserDTO.ifPresent(user -> metodo(user)); // si esta ejecutar esta operacion
+
+            // Devuelve informacion de donde encontrar este recurso
+            Link withSelfRel = linkTo(methodOn(UsersControllerRest.class).getUserById(userDTO.getId())).withSelfRel();
+            userDTO.add(withSelfRel);
+
+            /*if (userDTO == null) {
+                return ResponseEntity.notFound().build();
+            }*/
+
+            // Spring traduce el objeto java a json
+            // Jackson (libreria) esta trabajando para la serializacion y descerializacion
+            return ResponseEntity.ok(userDTO);
+        }catch (NoSuchElementException e) {
             return ResponseEntity.notFound().build();
-        }*/
-
-        // Spring traduce el objeto java a json
-        // Jackson (libreria) esta trabajando para la serializacion y descerializacion
-        return ResponseEntity.ok(userDTO);
+        }
     }
+
+    /*private void metodo(UserDTO user) {
+    }*/
 
     @GetMapping
     public ResponseEntity<CollectionModel<UserDTO>> listAllUsers( @RequestParam(required = false) String name,
