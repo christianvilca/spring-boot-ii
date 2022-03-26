@@ -56,4 +56,8 @@ public class UserDTO extends RepresentationModel<UserDTO> {
 
     @CIF // Podemos tambien poner mensaje
     private String cif;
+
+    private String title;
+
+    private String body;
 }
