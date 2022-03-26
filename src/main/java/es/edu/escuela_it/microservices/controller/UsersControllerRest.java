@@ -2,9 +2,12 @@ package es.edu.escuela_it.microservices.controller;
 
 import es.edu.escuela_it.microservices.model.AccountDTO;
 import es.edu.escuela_it.microservices.model.UserDTO;
+import es.edu.escuela_it.microservices.services.UserService;
 import es.edu.escuela_it.microservices.validators.GroupValidatorOnCreate;
 import es.edu.escuela_it.microservices.validators.GroupValidatorOnUpdate;
 import io.swagger.annotations.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -27,6 +30,10 @@ import java.util.stream.Collectors;
 @Api(tags = "User API Rest")
 public class UsersControllerRest {
 
+    @Autowired
+    //@Qualifier("BD")
+    private UserService userService;
+
     @GetMapping("/{id}")
     @ApiOperation(notes="Retrieve one user system by id", value="Get user by id")
     @ApiResponses(value = {
@@ -41,9 +48,8 @@ public class UsersControllerRest {
                     required = true)
             @PathVariable Integer id){ // Otra forma @PathVariable("id") Integer idUser
         System.out.println("Recovery user by id");
-        UserDTO userDTO = new UserDTO(1, "Christian");
-        userDTO.setAge(35);
-        userDTO.setLastname("Vilca");
+
+        UserDTO userDTO = userService.getUserById(id);
 
         // Devuelve informacion de donde encontrar este recurso
         Link withSelfRel = linkTo(methodOn(UsersControllerRest.class).getUserById(userDTO.getId())).withSelfRel();
