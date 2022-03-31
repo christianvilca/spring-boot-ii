@@ -1,0 +1,15 @@
+<configuration>
+<!--  Para usar uno o varios appender's (medio donde se ve el log) - En este caso: Consola  -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+<!--            La forma de como se muestran los errores-->
+<!--            [%thread] -> Normalmente se trabaja con el main-->
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+<!--  Definimos un logger en el nivel info (El que emite los log's)  -->
+    <root level="info">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
