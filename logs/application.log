@@ -1,0 +1,16 @@
+18:27:28.482 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final
+18:27:28.489 [main] INFO  e.e.e.m.MicroservicesJavaClassesApplication - Starting MicroservicesJavaClassesApplication using Java 17.0.1 on DESKTOP-V2VCIED with PID 12072 (C:\Users\Christian\Documents\IdeaProjects\microservices\target\classes started by Christian in C:\Users\Christian\Documents\IdeaProjects\microservices)
+18:27:28.489 [main] INFO  e.e.e.m.MicroservicesJavaClassesApplication - No active profile set, falling back to default profiles: default
+18:27:30.714 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+18:27:30.736 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+18:27:30.737 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+18:27:30.738 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.56]
+18:27:30.864 [main] INFO  o.a.c.c.C.[.[.[/escuelait/api/v1/microservices] - Initializing Spring embedded WebApplicationContext
+18:27:30.865 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2267 ms
+18:27:31.547 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+18:27:31.902 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+18:27:31.971 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/escuelait/api/v1/microservices'
+18:27:31.972 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+18:27:32.012 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+18:27:32.080 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+18:27:32.478 [main] INFO  e.e.e.m.MicroservicesJavaClassesApplication - Started MicroservicesJavaClassesApplication in 4.611 seconds (JVM running for 5.443)
