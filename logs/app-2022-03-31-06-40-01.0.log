@@ -1,0 +1,4 @@
+18:40:01.899 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+18:40:01.919 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+18:40:01.920 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+18:40:01.920 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.56]

@@ -1,0 +1,5 @@
+18:40:03.014 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/escuelait/api/v1/microservices'
+18:40:03.018 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+18:40:03.043 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+18:40:03.090 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+18:40:03.401 [main] INFO  e.e.e.m.MicroservicesJavaClassesApplication - Started MicroservicesJavaClassesApplication in 4.069 seconds (JVM running for 4.876)

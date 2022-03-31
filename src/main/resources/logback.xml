@@ -17,10 +17,26 @@
         </encoder>
     </appender>
 
+    <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+<!--        De forma predeterminara utilizara esta ruta-->
+        <file>app.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+<!--            Se modifica el nombre a traves de un patron - en este caso 1 archivo log por segundo -->
+            <fileNamePattern>logs/app-%d{yyyy-MM-dd-hh-mm-ss}.%i.log</fileNamePattern>
+<!--            Tamaño maximo del arhivo -->
+            <maxFileSize>1000KB</maxFileSize>
+<!--            Hasta 7 archivos de log, si se supera los 7 se borran los archivos de manera historica-->
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
     <!--  Definimos un logger en el nivel info (El que emite los log's)  -->
 <!--    Se mostrara los log's en la consola y en el archivo-->
     <root level="info">
         <appender-ref ref="STDOUT" />
-        <appender-ref ref="FILE" />
+        <appender-ref ref="ROLLING" />
     </root>
 </configuration>

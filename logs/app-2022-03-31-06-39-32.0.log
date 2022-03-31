@@ -1,0 +1,7 @@
+18:39:32.040 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+18:39:32.367 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+18:39:32.441 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/escuelait/api/v1/microservices'
+18:39:32.442 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+18:39:32.474 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+18:39:32.536 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+18:39:32.893 [main] INFO  e.e.e.m.MicroservicesJavaClassesApplication - Started MicroservicesJavaClassesApplication in 4.395 seconds (JVM running for 5.265)

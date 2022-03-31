@@ -1,0 +1,4 @@
+18:40:02.043 [main] INFO  o.a.c.c.C.[.[.[/escuelait/api/v1/microservices] - Initializing Spring embedded WebApplicationContext
+18:40:02.045 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2019 ms
+18:40:02.660 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+18:40:02.953 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
