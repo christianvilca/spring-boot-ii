@@ -21,6 +21,15 @@
         </encoder>
     </appender>
 
+    <appender name="FILE_CONTROLLER" class="ch.qos.logback.core.FileAppender" >
+<!--        Ruta del archivo-->
+        <file>logs/controller.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
     <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
 <!--        De forma predeterminara utilizara esta ruta-->
         <file>app.log</file>
@@ -74,6 +83,12 @@
             <root level="DEBUG">
                 <appender-ref ref="STDOUT" />
             </root>
+<!--            Logger a medida para el paquete controller-->
+<!--            root es el logger principal y todos lo logger que se definan van hererar la configuracion de root-->
+<!--            additivity=false -> Para indicar que las trazas del root no se agreguen a este appender -->
+            <logger name="es.edu.escuela_it.microservices.controller" level="ERROR" additivity="false">
+                <appender-ref ref="FILE_CONTROLLER" />
+            </logger>
         </then>
     </if>
 
