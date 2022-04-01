@@ -1,4 +1,8 @@
 <configuration>
+
+<!--    Obtenga claves de "application.properties" -->
+    <property scope="context" resource="application.properties" />
+
 <!--  Para usar uno o varios appender's (medio donde se ve el log) - En este caso: Consola  -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -51,8 +55,26 @@
 
     <!--  Definimos un logger en el nivel info (El que emite los log's)  -->
 <!--    Se mostrara los log's en la consola y en el archivo-->
-    <root level="info">
+<!--    <root level="info">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="SIFT" />
-    </root>
+    </root>-->
+
+<!--    Appender de acuerdo al entorno de trabajo -->
+    <if condition='property("env").equals("prod")'>
+        <then>
+            <root level="INFO">
+                <appender-ref ref="STDOUT" />
+            </root>
+        </then>
+    </if>
+
+    <if condition='property("env").equals("test")'>
+        <then>
+            <root level="DEBUG">
+                <appender-ref ref="STDOUT" />
+            </root>
+        </then>
+    </if>
+
 </configuration>
