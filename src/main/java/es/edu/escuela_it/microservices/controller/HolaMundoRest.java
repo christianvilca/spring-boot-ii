@@ -4,9 +4,11 @@ import es.edu.escuela_it.microservices.configuration.ApplicationConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -21,8 +23,10 @@ public class HolaMundoRest {
     @Autowired
     private ApplicationConfig appConfig;
 
-    @GetMapping("holamundo")
-    public String saludo(){
+    @GetMapping("/holamundo/{name}")
+    public String saludo(@PathVariable String name){
+
+        MDC.put("userid", name);
 
         log.trace("Ejecutando hola mundo trace");
         log.debug("Ejecutando hola mundo debug");

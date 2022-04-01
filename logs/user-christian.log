@@ -1,0 +1,3 @@
+19:42:00.855 [http-nio-8080-exec-1] INFO  e.e.e.m.controller.HolaMundoRest -Ejecutando hola mundo info
+19:42:00.857 [http-nio-8080-exec-1] WARN  e.e.e.m.controller.HolaMundoRest -Ejecutando hola mundo warn
+19:42:00.857 [http-nio-8080-exec-1] ERROR e.e.e.m.controller.HolaMundoRest -Ejecutando hola mundo error

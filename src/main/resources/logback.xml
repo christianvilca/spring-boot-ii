@@ -33,10 +33,26 @@
         </encoder>
     </appender>
 
+    <appender name="SIFT" class="ch.qos.logback.classic.sift.SiftingAppender">
+        <discriminator>
+<!--            Nombra cada archivo de log con este key-->
+            <key>userid</key>
+            <defaultValue>unknown</defaultValue>
+        </discriminator>
+        <sift>
+            <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+                <file>logs/user-${userid}.log</file>
+                <encoder>
+                    <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} -%msg%n</pattern>
+                </encoder>
+            </appender>
+        </sift>
+    </appender>
+
     <!--  Definimos un logger en el nivel info (El que emite los log's)  -->
 <!--    Se mostrara los log's en la consola y en el archivo-->
     <root level="info">
         <appender-ref ref="STDOUT" />
-        <appender-ref ref="ROLLING" />
+        <appender-ref ref="SIFT" />
     </root>
 </configuration>

@@ -1,0 +1,19 @@
+19:41:49.649 [main] INFO  e.e.e.m.MicroservicesJavaClassesApplication -Starting MicroservicesJavaClassesApplication using Java 17.0.1 on DESKTOP-V2VCIED with PID 3580 (C:\Users\Christian\Documents\IdeaProjects\microservices\target\classes started by Christian in C:\Users\Christian\Documents\IdeaProjects\microservices)
+19:41:49.643 [background-preinit] INFO  o.h.validator.internal.util.Version -HV000001: Hibernate Validator 6.2.0.Final
+19:41:49.654 [main] INFO  e.e.e.m.MicroservicesJavaClassesApplication -No active profile set, falling back to default profiles: default
+19:41:51.597 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer -Tomcat initialized with port(s): 8080 (http)
+19:41:51.614 [main] INFO  o.a.coyote.http11.Http11NioProtocol -Initializing ProtocolHandler ["http-nio-8080"]
+19:41:51.615 [main] INFO  o.a.catalina.core.StandardService -Starting service [Tomcat]
+19:41:51.615 [main] INFO  o.a.catalina.core.StandardEngine -Starting Servlet engine: [Apache Tomcat/9.0.56]
+19:41:51.735 [main] INFO  o.a.c.c.C.[.[.[/escuelait/api/v1/microservices] -Initializing Spring embedded WebApplicationContext
+19:41:51.735 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext -Root WebApplicationContext: initialization completed in 2016 ms
+19:41:52.370 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping -Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+19:41:52.716 [main] INFO  o.a.coyote.http11.Http11NioProtocol -Starting ProtocolHandler ["http-nio-8080"]
+19:41:52.799 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer -Tomcat started on port(s): 8080 (http) with context path '/escuelait/api/v1/microservices'
+19:41:52.800 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper -Context refreshed
+19:41:52.835 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper -Found 1 custom documentation plugin(s)
+19:41:52.891 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner -Scanning for api listing references
+19:41:53.235 [main] INFO  e.e.e.m.MicroservicesJavaClassesApplication -Started MicroservicesJavaClassesApplication in 4.194 seconds (JVM running for 5.058)
+19:42:00.811 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[.[.[/escuelait/api/v1/microservices] -Initializing Spring DispatcherServlet 'dispatcherServlet'
+19:42:00.811 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet -Initializing Servlet 'dispatcherServlet'
+19:42:00.813 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet -Completed initialization in 0 ms
