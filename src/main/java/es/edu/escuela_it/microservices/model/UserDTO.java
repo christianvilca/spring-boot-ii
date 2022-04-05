@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import org.springframework.hateoas.RepresentationModel;
 
+import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -19,12 +20,15 @@ import java.time.LocalTime;
 @RequiredArgsConstructor
 @ApiModel(description = "System user")
 // RepresentationModel -> Objeto de HATEOAS
+@Entity(name = "ms_users") // Se mapea con una tabla de la BD
 public class UserDTO extends RepresentationModel<UserDTO> {
 
     @NonNull
     // Estas anotaciones repercuten en las interfaces graficas del swagger
     @NotNull
     @ApiModelProperty(notes = "Unique identifier of the User.", example = "1", required = true, position = 0)
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
     @NonNull
@@ -33,6 +37,7 @@ public class UserDTO extends RepresentationModel<UserDTO> {
 
     @NotNull
     @Size(min = 6, max = 20)
+    @Column(name = "last_name")
     private String lastname;
 
     @Positive
