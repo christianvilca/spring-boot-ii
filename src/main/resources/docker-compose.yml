@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  postgres9:
+    image: postgres:9.6.12
+    container_name: database_postgres
+    volumes:
+      - data:/opt/microservices/data  # En el disco rigido indica en que lugar host se van a alojar los datos
+    ports:
+      - 5432:5432 # Mapea el puerto (puerto de postgres:puerto del host - maquina real) hace un binding con la maquina real
+    environment:
+      POSTGRES_DB: microservices
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+
+volumes:
+  data: {}
