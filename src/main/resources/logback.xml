@@ -87,7 +87,7 @@
 <!--            root es el logger principal y todos lo logger que se definan van hererar la configuracion de root-->
 <!--            additivity=false -> Para indicar que las trazas del root no se agreguen a este appender -->
             <logger name="es.edu.escuela_it.microservices.controller" level="ERROR" additivity="false">
-                <appender-ref ref="FILE_CONTROLLER" />
+                <appender-ref ref="STDOUT" />
             </logger>
         </then>
     </if>
