@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Primary // Hay 2 implemencaciones, pero con esta anotacion elige esta clase como prioridad
@@ -25,5 +26,20 @@ public class UserServiceCloudImpl implements UserService{
         UserDTO userDTO = userClient.getUser(id);
 
         return Optional.ofNullable(userDTO);
+    }
+
+    @Override
+    public List<UserDTO> listAllUsers() {
+        return null;
+    }
+
+    @Override
+    public UserDTO saveUser(UserDTO userDTO) {
+        return null;
+    }
+
+    @Override
+    public void deleteById(Integer id) {
+
     }
 }

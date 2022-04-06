@@ -83,9 +83,7 @@ public class UsersControllerRest {
                                        @RequestParam(required = false) String lastName,
                                        @RequestParam(required = false) Integer age) {
 
-        List<UserDTO> list = List.of(new UserDTO(1, "Rafael"),
-                new UserDTO(2, "Miguel"),
-                new UserDTO(3, "Alvaro"));
+        List<UserDTO> list = userService.listAllUsers();
 
         for (UserDTO userDTO : list) {
             Link withSelfRel = linkTo(methodOn(UsersControllerRest.class).getUserById(userDTO.getId())).withSelfRel();
@@ -110,6 +108,8 @@ public class UsersControllerRest {
     public ResponseEntity<String> createUser(@Validated(value = GroupValidatorOnCreate.class) @RequestBody UserDTO userDTO){
         System.out.println("Recovery user by id " + userDTO.getName());
 
+        userDTO = userService.saveUser(userDTO);
+
         // Recupera la ruta actual
         URI location = ServletUriComponentsBuilder.
                 fromCurrentRequest()
@@ -129,6 +129,9 @@ public class UsersControllerRest {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Integer id){
         System.out.println("Delete user by id");
+
+        userService.deleteById(id);
+
         return ResponseEntity.ok(null);
     }
 
