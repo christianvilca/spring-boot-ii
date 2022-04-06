@@ -9,6 +9,8 @@ import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -83,7 +85,7 @@ public class UsersControllerRest {
     public ResponseEntity<CollectionModel<UserDTO>> listAllUsers(@RequestParam(required = false) String name,
                                                                  @RequestParam(required = false) String lastName,
                                                                  @RequestParam(required = false) Integer age,
-                                                                 Pageable pageable) {
+                                                                 @PageableDefault(size = 3, sort = {"edad", "name"}, direction = Sort.Direction.ASC ) Pageable pageable) {
 
         List<UserDTO> list = userService.listAllUsers(pageable);
 
