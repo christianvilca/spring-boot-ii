@@ -62,6 +62,15 @@
         </sift>
     </appender>
 
+    <appender name="json" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.contrib.json.classic.JsonLayout">
+            <jsonFormatter class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter">
+                <prettyPrint>true</prettyPrint>
+            </jsonFormatter>
+            <timestampFormat>yyyy-MM-dd' 'HH:mm:ss.SSS</timestampFormat>
+        </layout>
+    </appender>
+
     <!--  Definimos un logger en el nivel info (El que emite los log's)  -->
 <!--    Se mostrara los log's en la consola y en el archivo-->
 <!--    <root level="info">
@@ -73,7 +82,7 @@
     <if condition='property("env").equals("prod")'>
         <then>
             <root level="INFO">
-                <appender-ref ref="STDOUT" />
+                <appender-ref ref="json" />
             </root>
         </then>
     </if>
