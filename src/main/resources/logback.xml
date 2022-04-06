@@ -82,7 +82,7 @@
     <if condition='property("env").equals("prod")'>
         <then>
             <root level="INFO">
-                <appender-ref ref="json" />
+                <appender-ref ref="STDOUT" />
             </root>
         </then>
     </if>

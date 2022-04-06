@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDTO> listAllUsers() {
-        List<UserDTO> users = userRepository.findAll();
+        List<UserDTO> users = userRepository.findByAgeLessThan(22);
         return users;
     }
 
