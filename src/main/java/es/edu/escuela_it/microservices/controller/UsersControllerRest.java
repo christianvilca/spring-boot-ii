@@ -8,6 +8,7 @@ import es.edu.escuela_it.microservices.validators.GroupValidatorOnUpdate;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -79,11 +80,12 @@ public class UsersControllerRest {
     }*/
 
     @GetMapping
-    public ResponseEntity<CollectionModel<UserDTO>> listAllUsers( @RequestParam(required = false) String name,
-                                       @RequestParam(required = false) String lastName,
-                                       @RequestParam(required = false) Integer age) {
+    public ResponseEntity<CollectionModel<UserDTO>> listAllUsers(@RequestParam(required = false) String name,
+                                                                 @RequestParam(required = false) String lastName,
+                                                                 @RequestParam(required = false) Integer age,
+                                                                 Pageable pageable) {
 
-        List<UserDTO> list = userService.listAllUsers();
+        List<UserDTO> list = userService.listAllUsers(pageable);
 
         for (UserDTO userDTO : list) {
             Link withSelfRel = linkTo(methodOn(UsersControllerRest.class).getUserById(userDTO.getId())).withSelfRel();
@@ -93,7 +95,7 @@ public class UsersControllerRest {
             userDTO.add(accountsRel);
         }
 
-        Link link = linkTo(methodOn(UsersControllerRest.class).listAllUsers("", "", 0)).withSelfRel();
+        Link link = linkTo(methodOn(UsersControllerRest.class).listAllUsers("", "", 0, pageable)).withSelfRel();
         CollectionModel<UserDTO> result = CollectionModel.of(list, link);
         return ResponseEntity.ok(result);
 

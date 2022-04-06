@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public class UserServiceCloudImpl implements UserService{
     }
 
     @Override
-    public List<UserDTO> listAllUsers() {
+    public List<UserDTO> listAllUsers(Pageable pageable) {
         return null;
     }
 
