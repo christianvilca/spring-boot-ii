@@ -1,5 +1,6 @@
 package es.edu.escuela_it.microservices.services;
 
+import es.edu.escuela_it.microservices.dao.entities.UserEntity;
 import es.edu.escuela_it.microservices.dao.repositories.UserRepository;
 import es.edu.escuela_it.microservices.model.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,23 +22,27 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     public Optional<UserDTO> getUserById(Integer id) {
-        Optional<UserDTO> userDTO = userRepository.findById(id);
-        return userDTO;
+        Optional<UserEntity> optUserDto = userRepository.findById(id);
+        UserEntity userEntity = optUserDto.get();
+        UserDTO userDTO = new UserDTO(userEntity.getId(), userEntity.getName());
+        userDTO.setLastname(userEntity.getLastname());
+
+        return Optional.of(userDTO);
     }
 
     @Override
     public List<UserDTO> listAllUsers(Pageable pageable) {
         // List<UserDTO> users = userRepository.findByAgeLessThan(22);
-        Page<UserDTO> pageUsers = userRepository.findAll(pageable);
+        Page<UserEntity> pageUsers = userRepository.findAll(pageable);
 
-        List<UserDTO> userDtos = pageUsers.getContent();
+        List<UserEntity> userDtos = pageUsers.getContent();
 
-        return userDtos;
+        return null;
     }
 
     @Override
     public UserDTO saveUser(UserDTO userDTO) {
-        userDTO = userRepository.save(userDTO);
+        //userDTO = userRepository.save(null);
         return userDTO;
     }
 
