@@ -18,6 +18,7 @@ public class UserEntity extends RepresentationModel<UserEntity> {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
+    @NonNull
     private String name;
 
     @Column(name = "last_name")

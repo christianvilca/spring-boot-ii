@@ -19,11 +19,14 @@ import java.util.Optional;
 @ConditionalOnProperty(prefix = "app", name = "edition", havingValue = "community") // Aqui lo elije por un archivo .properties
 public class UserServiceImpl implements UserService {
 
-    @Autowired
     private UserMapper userMapper;
 
-    @Autowired
     private UserRepository userRepository;
+
+    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper){
+        this.userRepository = userRepository;
+        this.userMapper = userMapper;
+    }
 
     public Optional<UserDTO> getUserById(Integer id) {
         Optional<UserEntity> optUserDto = userRepository.findById(id);
@@ -42,6 +45,8 @@ public class UserServiceImpl implements UserService {
         List<UserEntity> usersEntities = pageUsers.getContent();
 
         List<UserDTO> userDtos = userMapper.getUserDtos(usersEntities);
+
+        userDtos.forEach(u -> u.setName("Developer " + u.getName()));
 
         return userDtos;
     }
