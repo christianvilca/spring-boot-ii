@@ -6,6 +6,7 @@ import es.edu.escuela_it.microservices.mappers.UserMapper;
 import es.edu.escuela_it.microservices.model.UserDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -26,6 +27,7 @@ import static org.mockito.Mockito.verify;
 public class UserServiceImplTest{
 
     // Clase sometida a test
+    @InjectMocks
     private UserServiceImpl userServiceImpl;
 
     @Mock
@@ -58,7 +60,7 @@ public class UserServiceImplTest{
         MockitoAnnotations.initMocks(this);
 
         // UserService a partir del Mock
-        userServiceImpl = new UserServiceImpl(userRepository, userMapper);
+        //userServiceImpl = new UserServiceImpl(userRepository, userMapper);
 
         Page<UserEntity> pagedUserEntities = new PageImpl<>(userEntities);
 
