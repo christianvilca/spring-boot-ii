@@ -105,6 +105,13 @@ public class UserServiceImplTest{
         assertEquals(first.get().getName(), "Developer Miguel"); // Evaluamos la logica de negocio
     }
 
+    @ParameterizedTest
+    @ValueSource(ints = { 1, 2, 3 })
+    public final void sum(int i) {
+        log.info("valor i " + i);
+        assertTrue(i > 0);
+    }
+
     @AfterEach
     void tearDown() {
         log.info("@AfterEach - executed after each test method.");
