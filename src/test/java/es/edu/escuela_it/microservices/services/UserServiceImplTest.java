@@ -18,7 +18,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import uk.co.jemos.podam.api.PodamFactory;
+import uk.co.jemos.podam.api.PodamFactoryImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,6 +43,10 @@ public class UserServiceImplTest{
     @Mock
     private UserMapper userMapper;
 
+    private static PodamFactory factory;
+
+    private final static int EXPECTED_SIZE = 99;
+
     private static List<UserEntity> userEntities;
 
     private static List<UserDTO> usersDtos;
@@ -49,12 +56,51 @@ public class UserServiceImplTest{
     @BeforeAll
     static void setup() {
 
+        // Inicializacion de la libreria
+        factory = new PodamFactoryImpl();
+        factory.getStrategy().setMemoization(false);
+
+        userEntities = new ArrayList<UserEntity>();
+        usersDtos = new ArrayList<UserDTO>();
+
+        for (int i = 0; i < 100; i++) {
+            // Manufacturacion del objeto
+            // Completara todos los datos de UserEntity
+            // Buscara getter y setter e incorpodara informacion sin sentido, pero valido para las pruebas
+            UserEntity userEntity = factory.manufacturePojoWithFullData(UserEntity.class);
+            userEntities.add(userEntity);
+
+            // Ahorra recursos computacionales minimos, pero recomendada
+            // Si el trace estuviera a nivel error, porlo que info no va llegar a ejecutarse
+            // Pero si va llegar a ejecurarse ""User:  {}" + userEntity.toString()"
+            // Es mejor ejecutar lo de esta forma: ""User:  {}", userEntity.toString()"
+            // Por que asi suministramos 2 parametros y es dentro de info que se encarga de hacer esa conjuncion
+            log.info("User:  {}" + userEntity.toString());
+
+            UserDTO userDto = factory.manufacturePojoWithFullData(UserDTO.class);
+            usersDtos.add(userDto);
+
+            log.info("User:  {}" + userDto.toString());
+        }
+
         PageRequest pageRequest = PageRequest.of(0, 10);
         pageable = pageRequest.next();
 
-        userEntities = List.of(new UserEntity(1, "Miguel"), new UserEntity(1, "Rafael"), new UserEntity(1, "Alvaro"));
-        usersDtos = List.of(new UserDTO(1, "Miguel"), new UserDTO(1, "Rafael"), new UserDTO(1, "Alvaro"));
     }
+
+    /**
+     * 00:06:45.006 [main] INFO  e.e.e.m.services.UserServiceImplTest - User:  {}
+     * UserDTO(
+     *          id=1067267737,
+     *          name=icScBAV1uS,
+     *          lastname=dK_Fcw_sR7BjWHdk2,
+     *          email=null,
+     *          active=true,
+     *          birthDay=null,
+     *          cif=null,
+     *          title=Xk3sVkzNQe,
+     *          body=NkpQyvZ5Kp)
+     */
 
     @BeforeEach
     public void setUpBefore() {
@@ -80,6 +126,7 @@ public class UserServiceImplTest{
         Mockito.when(userMapper.getUserDtos(userEntities)).thenReturn(usersDtos);
 
         log.info("@BeforeEach - executed before each test method");
+
     }
 
     @DisplayName("Test Get list users Service") // Nombre que aparecera en el reporte de test
@@ -100,7 +147,7 @@ public class UserServiceImplTest{
         verify(userMapper, atLeast(1)).getUserDtos(userEntities);
 
         //Asserts
-        assertTrue(listAllUsers.size()>2);
+        assertTrue(listAllUsers.size()>EXPECTED_SIZE);
         Optional<UserDTO> first = listAllUsers.stream().findFirst();
         assertEquals(first.get().getName(), "Developer Miguel"); // Evaluamos la logica de negocio
     }
