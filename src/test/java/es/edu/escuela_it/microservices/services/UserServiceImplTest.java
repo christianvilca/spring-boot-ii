@@ -6,6 +6,10 @@ import es.edu.escuela_it.microservices.mappers.UserMapper;
 import es.edu.escuela_it.microservices.model.UserDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -78,6 +82,10 @@ public class UserServiceImplTest{
         log.info("@BeforeEach - executed before each test method");
     }
 
+    @DisplayName("Test Get list users Service") // Nombre que aparecera en el reporte de test
+    @Order(1)   // Si tengo varios test, indico el orden
+    //@Disabled   // Desabilita o ignora el test
+    @EnabledOnOs(OS.LINUX)  // Ejecutar el test, siempre que este ejecutandose sobre la plataforma LINUX
     @Test
     public void test_when_listUser_then_returnAllUsers(){
         log.info("Get all users");
