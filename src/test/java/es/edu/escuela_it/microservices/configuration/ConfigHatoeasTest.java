@@ -10,10 +10,10 @@ import org.springframework.plugin.core.SimplePluginRegistry;
 import java.util.ArrayList;
 import java.util.List;
 
-@Configuration
+//@Configuration
 public class ConfigHatoeasTest {
 
-    @Bean
+    //@Bean
     public LinkDiscoverers discoverers() {
         List<LinkDiscoverer> plugins = new ArrayList<>();
         plugins.add(new CollectionJsonLinkDiscoverer());
